@@ -1,0 +1,79 @@
+e_quakes<-datasets::quakes
+View(e_quakes)
+####Top 10 rows and last 10 rows
+head(e_quakes,10)
+tail(e_quakes,10)
+######Columns
+
+e_quakes[,c(1,4)]
+df<-e_quakes[,-5]
+summary(e_quakes) #discriptive stats
+e_quakes$long
+e_quakes$stations
+
+###########Summary of the data#########
+summary(e_quakes[,5]) # for 1st column
+summary(e_quakes$stations)
+summary(e_quakes[,'depth'])
+summary(e_quakes$depth) 
+
+#####################
+plot(e_quakes$depth)
+plot(e_quakes$depth,e_quakes$long,type="p")
+plot(e_quakes)
+# points and lines 
+plot(e_quakes$long, type= "l") # p: points, l: lines,b: both
+plot(e_quakes$stations, xlab = 'X', 
+     ylab = 'Y', main = 'E_quakes',
+     col = 'green')
+
+
+# Horizontal bar plot
+barplot(e_quakes$depth, main = 'E_quakes',
+        ylab = 'A', col= 'blue',horiz = T,axes=T)
+
+
+#Histogram
+hist(e_quakes$long)
+hist(e_quakes$mag, 
+     main = 'E_quakes',
+     xlab = 'A.', col='yellow')
+
+#Single box plot
+boxplot(e_quakes$depth,main="Boxplot")
+
+# Multiple box plots
+boxplot(e_quakes[,1:5],main='Multiple')
+
+ #margin of the grid(mar), 
+#no of rows and columns(mfrow), 
+#whether a border is to be included(bty) 
+#and positionof the 
+#labels(las: 1 for horizontal, las: 0 for vertical)
+#bty - box around the plot
+
+par(mfrow=c(3,3),mar=c(2,5,2,1),  las=1, bty="n")
+
+plot(e_quakes$lat)
+plot(e_quakes$lat, e_quakes$stations)
+plot(e_quakes$lat, type= "l")
+plot(e_quakes$depth, type= "l")
+plot(e_quakes$long, type= "l")
+barplot(e_quakes$depth, main = 'E_quakes',
+        xlab = 'X', col='brown',horiz = TRUE)
+hist(e_quakes$stations)
+boxplot(e_quakes$stations)
+boxplot(e_quakes[,0:5], main='Multiple Box plots')
+
+install.packages("moments")
+library(moments)
+
+mean(e_quakes$depth, na.rm = T)
+median(e_quakes$long, na.rm = T)
+
+var(e_quakes$depth, na.rm = T)
+sd(e_quakes$depth, na.rm = T)
+
+skewness(e_quakes$depth, na.rm = T)
+kurtosis(e_quakes$depth, na.rm = T)
+
